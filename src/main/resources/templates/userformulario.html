@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>TODO supply a title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav th:replace="fragmentos :: navbar"></nav>
+<div class="container mt-5 main">
+  <h1 th:text="${title}"></h1>
+  <hr class="mb-5 col-xl-12"/>
+  <form autocomplete="off" class="row g-3 needs-validation" id="formulario" novalidate th:action="@{/user/__${action}__}" method="post" th:object="${user}">
+    <div class="form-floating mb-3 col-xl-6">
+      <input type="hidden" id="id" th:field="*{id}">
+      <label for="id"></label>
+    </div>
+
+
+    <div class="form-group">
+      <label for="userName" class="form-label">Nombre</label>
+      <input type="text" class="form-control " id="userName" required placeholder="Nombre" th:field="*{name}"><!--is-valid -->
+    </div>
+
+    <div class="row">
+      <div class="col-xl-3">
+        <button th:text="${action == 'guardar'} ? 'Crear Usuario' : 'Guardar usuario'"
+                type="submit" class="btn btn-success"></button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- JS -->
+<footer class="footer fixed-bottom" style="background-color: #3e4551">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    Agus  © 2022 Copyright:
+  </div>
+</footer>
+
+<script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav th:replace="fragmentos :: navbar"></nav>
+<div class="container mt-5 main">
+    <h1>Listado de usuarios</h1>
+    <hr class="mb-5"/>
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-success" th:if="${exitoModificacion != null}" th:text="${exitoModificacion}"></div>
+    <div class="alert alert-danger" th:if="${errorUser != null}" th:text="${errorUser}"></div>
+  <!--  <div th:if="${user.isEmpty()}">
+        <h5>Todavia no hay usuarios cargados. <a th:href="@{/user/crear}">Cargar usuario</a></h5>
+    </div>
+-->
+    <div class="table-responsive" th:unless="${users.isEmpty()}">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-secondary text-center">
+            <tr>
+                <th class="col-md-1 ps-2" scope="col">ID</th>
+                <th class="col-md-3 ps-2" scope="col">NOMBRE</th>
+                <th class="col-md-2 ps-2" scope="col">ESTADO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.register} ? 'si':'no'"></td>
+                    <a th:href="@{/user/editar/__${user.id}__}" class="btn btn-warning" >Editar</a>
+                    <form method="post" th:action="@{/user/eliminar/__${user.id}__}">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- JS -->
+<footer class="footer fixed-bottom" style="background-color: #3e4551">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        Agus  © 2022 Copyright:
+    </div>
+</footer>
+
+<script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
